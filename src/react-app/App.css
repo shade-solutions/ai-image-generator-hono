@@ -11,12 +11,15 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+
 .logo.cloudflare:hover {
   filter: drop-shadow(0 0 2em #f6821faa);
 }
@@ -25,6 +28,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -42,4 +46,102 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Image Generator Styles */
+.subtitle {
+  color: #888;
+  font-size: 1.1em;
+  margin: -0.5em 0 2em 0;
+}
+
+.image-generator {
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: left;
+}
+
+.image-generator h2 {
+  text-align: center;
+  color: #646cff;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.model-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.model-selection label {
+  font-weight: 500;
+  color: #ddd;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.generated-images {
+  margin-top: 2rem;
+}
+
+.generated-images h3 {
+  text-align: center;
+  color: #42b883;
+}
+
+.sample-prompts {
+  padding: 1.5rem;
+  background: rgba(100, 108, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+}
+
+.sample-prompts h3 {
+  margin-top: 0;
+  color: #646cff;
+}
+
+.sample-prompts button:hover {
+  background-color: #646cff !important;
+  color: white !important;
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* Error and loading states */
+button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+
+  .model-selection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .sample-prompts button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 }

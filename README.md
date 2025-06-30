@@ -1,83 +1,287 @@
-# React + Vite + Hono + Cloudflare Workers
+# AI Image Generator API
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
 
-This template provides a minimal setup for building a React application with TypeScript and Vite, designed to run on Cloudflare Workers. It features hot module replacement, ESLint integration, and the flexibility of Workers deployments.
+A powerful AI image generation API built with React + Vite + Hono + Cloudflare Workers, providing comprehensive endpoints for generating AI images using various models through LM Arena integration.
 
-![React + TypeScript + Vite + Cloudflare Workers](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+![AI Image Generator](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
 
-<!-- dash-content-start -->
+## 🎨 Features
 
-🚀 Supercharge your web development with this powerful stack:
+- **Multiple AI Models**: Support for Flux Pro 1.1, Flux Dev, and more
+- **Single Image Generation**: Generate images with custom prompts
+- **Model Comparison**: Compare outputs from different AI models side-by-side
+- **Batch Processing**: Generate multiple images with different prompts
+- **Modern UI**: Beautiful React interface with real-time image display
+- **RESTful API**: Comprehensive API endpoints with full documentation
+- **Edge Computing**: Deployed on Cloudflare Workers for global performance
 
-- [**React**](https://react.dev/) - A modern UI library for building interactive interfaces
+## 🚀 Tech Stack
+
+- [**React**](https://react.dev/) - Modern UI library with TypeScript
 - [**Vite**](https://vite.dev/) - Lightning-fast build tooling and development server
 - [**Hono**](https://hono.dev/) - Ultralight, modern backend framework
 - [**Cloudflare Workers**](https://developers.cloudflare.com/workers/) - Edge computing platform for global deployment
+- **LM Arena Integration** - AI model access through LM Arena API
 
-### ✨ Key Features
+## ✨ Key Features
 
 - 🔥 Hot Module Replacement (HMR) for rapid development
-- 📦 TypeScript support out of the box
-- 🛠️ ESLint configuration included
-- ⚡ Zero-config deployment to Cloudflare's global network
-- 🎯 API routes with Hono's elegant routing
-- 🔄 Full-stack development setup
+- ⚡ TypeScript support with full type safety
+- 🌐 Edge deployment with global CDN
+- 🎯 RESTful API with comprehensive documentation
+- 🖼️ Multiple AI model support
+- 🔄 Model comparison capabilities
+- 📱 Responsive web interface
+- 🚀 Production-ready deployment
 
-Get started in minutes with local development or deploy directly via the Cloudflare dashboard. Perfect for building modern, performant web applications at the edge.
+## 🚀 Quick Start
 
-<!-- dash-content-end -->
+### Prerequisites
+- Node.js 18+ and npm
+- Cloudflare account (for deployment)
 
-## Getting Started
+### Development Setup
 
-To start a new project with this template, run:
+1. **Clone and Install**
+   ```bash
+   git clone <your-repo-url>
+   cd ai-image-generator
+   npm install
+   ```
 
+2. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+   
+3. **Open in Browser**
+   ```
+   http://localhost:8787
+   ```
+
+### Test the API
+
+Run the included test script:
 ```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/vite-react-template
+node test-api.js
 ```
 
-A live deployment of this template is available at:
-[https://react-vite-template.templates.workers.dev](https://react-vite-template.templates.workers.dev)
+## 📖 API Documentation
 
-## Development
-
-Install dependencies:
-
-```bash
-npm install
+### Base URL
+```
+http://localhost:8787 (development)
+https://your-worker.workers.dev (production)
 ```
 
-Start the development server with:
+### Quick Examples
 
+**Generate Single Image:**
 ```bash
-npm run dev
+curl -X POST http://localhost:8787/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "A sunset over ocean waves", "model": "flux-pro-1.1"}'
 ```
 
-Your application will be available at [http://localhost:5173](http://localhost:5173).
-
-## Production
-
-Build your project for production:
-
+**Compare Two Models:**
 ```bash
-npm run build
+curl -X POST http://localhost:8787/api/compare \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "A cyberpunk cityscape", "modelA": "flux-pro-1.1", "modelB": "flux-dev"}'
 ```
 
-Preview your build locally:
-
+**Batch Generate:**
 ```bash
-npm run preview
+curl -X POST http://localhost:8787/api/batch \
+  -H "Content-Type: application/json" \
+  -d '{"prompts": ["A cat in space", "A dragon"], "model": "flux-pro-1.1"}'
 ```
 
-Deploy your project to Cloudflare Workers:
+### Available Endpoints
 
-```bash
-npm run build && npm run deploy
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/models` | List available models |
+| POST | `/api/generate` | Generate single image |
+| POST | `/api/compare` | Compare two models |
+| POST | `/api/batch` | Batch generate images |
+| GET | `/api/docs` | Full API documentation |
+
+For complete API documentation, visit `/api/docs` or see [API_DOCUMENTATION.md](./API_DOCUMENTATION.md).
+
+## 🎨 Usage Examples
+
+### Web Interface
+1. Open the app in your browser
+2. Enter a prompt like "A majestic dragon flying over mountains"
+3. Select your preferred AI model
+4. Click "Generate Image" or "Compare Models"
+5. View the generated images instantly
+
+### JavaScript/Node.js
+```javascript
+const response = await fetch('http://localhost:8787/api/generate', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    prompt: 'A peaceful zen garden with cherry blossoms',
+    model: 'flux-pro-1.1'
+  })
+});
+
+const result = await response.json();
+console.log('Generated image:', result.images[0].url);
 ```
 
-## Additional Resources
+### Python
+```python
+import requests
 
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
-- [Vite Documentation](https://vitejs.dev/guide/)
-- [React Documentation](https://reactjs.org/)
-- [Hono Documentation](https://hono.dev/)
+response = requests.post(
+    'http://localhost:8787/api/generate',
+    json={
+        'prompt': 'A futuristic city with flying cars',
+        'model': 'flux-pro-1.1'
+    }
+)
+
+result = response.json()
+if result['success']:
+    print(f"Image URL: {result['images'][0]['url']}")
+```
+
+## 🏗️ Project Structure
+
+```
+ai-image-generator/
+├── src/
+│   ├── react-app/          # React frontend
+│   │   ├── App.tsx         # Main React component
+│   │   ├── App.css         # Styling
+│   │   └── assets/         # Static assets
+│   └── worker/
+│       └── index.ts        # Hono API backend
+├── public/                 # Public static files
+├── test-api.js            # API testing script
+├── API_DOCUMENTATION.md   # Complete API docs
+├── package.json
+├── vite.config.ts
+├── wrangler.json         # Cloudflare Workers config
+└── README.md
+```
+
+## 🚀 Deployment
+
+### Deploy to Cloudflare Workers
+
+1. **Install Wrangler CLI**
+   ```bash
+   npm install -g wrangler
+   ```
+
+2. **Login to Cloudflare**
+   ```bash
+   wrangler login
+   ```
+
+3. **Deploy**
+   ```bash
+   npm run deploy
+   ```
+
+4. **Access Your API**
+   ```
+   https://your-worker-name.your-subdomain.workers.dev
+   ```
+
+### Environment Configuration
+
+For production, update the authentication in `src/worker/index.ts` or use environment variables:
+
+```bash
+wrangler secret put LM_ARENA_COOKIES
+```
+
+## 🛠️ Development
+
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run deploy` - Deploy to Cloudflare Workers
+- `npm run lint` - Run ESLint
+- `node test-api.js` - Test API endpoints
+
+### File Structure
+- **Frontend**: React app in `src/react-app/`
+- **Backend**: Hono API in `src/worker/`
+- **Build**: Vite configuration in `vite.config.ts`
+- **Deploy**: Cloudflare Workers config in `wrangler.json`
+
+## 🔧 Available Models
+
+Currently supported AI models:
+- **flux-pro-1.1**: High-quality image generation
+- **flux-dev**: Development version with faster processing
+- *More models can be added by updating the MODELS object in the worker*
+
+## 🎯 Features Overview
+
+### 1. Single Image Generation
+Generate high-quality images with custom prompts using your preferred AI model.
+
+### 2. Model Comparison
+Compare outputs from different AI models side-by-side to see which performs better for your specific use case.
+
+### 3. Batch Processing
+Generate multiple images with different prompts efficiently, with configurable delays to respect rate limits.
+
+### 4. Beautiful Web Interface
+Modern, responsive React interface with:
+- Real-time image display
+- Sample prompts
+- Model selection
+- Error handling
+- Loading states
+
+### 5. Comprehensive API
+RESTful API with:
+- Full documentation
+- Type safety
+- Error handling
+- CORS support
+- JSON responses
+
+## 🔒 Security Considerations
+
+- **Authentication**: Update hardcoded credentials for production
+- **Rate Limiting**: Implement proper rate limiting
+- **Input Validation**: Add request sanitization
+- **Environment Variables**: Use secrets for sensitive data
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🆘 Support
+
+- Check the [API Documentation](./API_DOCUMENTATION.md)
+- Run `node test-api.js` to verify your setup
+- Visit `/api/docs` for interactive documentation
+- Open an issue for bugs or feature requests
+
+## 🌟 Acknowledgments
+
+- Built on the Cloudflare Workers platform
+- Integrates with LM Arena for AI model access
+- Uses the powerful Hono framework for API development
